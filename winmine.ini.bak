@@ -1,0 +1,58 @@
+[Difficulty]
+;Intermediate, Expert, Custom
+Mode = Beginner
+
+[CustomSettings]
+width = 9
+height = 10
+bombs = 15
+
+;Beginnner (9x9) 10, 
+;Intermediate (16x16) 40, 
+;Expert (30x16) 99
+
+[Beginner]
+1 = Anonymous	990
+2 = Anonymous	991
+3 = Anonymous	992
+4 = Anonymous	993
+5 = Anonymous	994
+6 = Anonymous	995
+7 = Anonymous	996
+8 = Anonymous	997
+9 = Anonymous	998
+10 = Anonymous	999
+
+[Intermediate]
+1 = Anonymous	999
+2 = Anonymous	999
+3 = Anonymous	999
+4 = Anonymous	999
+5 = Anonymous	999
+6 = Anonymous	999
+7 = Anonymous	999
+8 = Anonymous	999
+9 = Anonymous	999
+10 = Anonymous	999
+[Expert]
+1 = Anonymous	999
+2 = Anonymous	999
+3 = Anonymous	999
+4 = Anonymous	999
+5 = Anonymous	999
+6 = Anonymous	999
+7 = Anonymous	999
+8 = Anonymous	999
+9 = Anonymous	999
+10 = Anonymous	999
+[Custom]
+1 = Anonymous	999
+2 = Anonymous	999
+3 = Anonymous	999
+4 = Anonymous	999
+5 = Anonymous	999
+6 = Anonymous	999
+7 = Anonymous	999
+8 = Anonymous	999
+9 = Anonymous	999
+10 = Anonymous	999

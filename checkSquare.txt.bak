@@ -1,0 +1,8 @@
+checkSquare()
+{
+	If bomb > Explode
+	If adjacent bomb > Number
+	If no adjacent bombs
+		> Reveal blank square
+		for each square connected call checkSquare()
+}
