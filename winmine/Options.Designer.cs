@@ -29,28 +29,32 @@ namespace winmine
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Options));
             this.btnOkay = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblWidth = new System.Windows.Forms.Label();
-            this.lblHeight = new System.Windows.Forms.Label();
-            this.lblBombs = new System.Windows.Forms.Label();
-            this.txtWidth = new System.Windows.Forms.TextBox();
-            this.txtHeight = new System.Windows.Forms.TextBox();
             this.txtBombs = new System.Windows.Forms.TextBox();
+            this.txtHeight = new System.Windows.Forms.TextBox();
+            this.txtWidth = new System.Windows.Forms.TextBox();
+            this.lblBombs = new System.Windows.Forms.Label();
+            this.lblHeight = new System.Windows.Forms.Label();
+            this.lblWidth = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOkay
             // 
-            this.btnOkay.Location = new System.Drawing.Point(40, 98);
+            this.btnOkay.Location = new System.Drawing.Point(78, 98);
             this.btnOkay.Name = "btnOkay";
-            this.btnOkay.Size = new System.Drawing.Size(75, 23);
+            this.btnOkay.Size = new System.Drawing.Size(78, 23);
             this.btnOkay.TabIndex = 0;
             this.btnOkay.Text = "Okay";
             this.btnOkay.UseVisualStyleBackColor = true;
+            this.btnOkay.Click += new System.EventHandler(this.btnOkay_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnCancel);
             this.groupBox1.Controls.Add(this.txtBombs);
             this.groupBox1.Controls.Add(this.txtHeight);
             this.groupBox1.Controls.Add(this.txtWidth);
@@ -64,25 +68,26 @@ namespace winmine
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
-            // lblWidth
+            // txtBombs
             // 
-            this.lblWidth.AutoSize = true;
-            this.lblWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWidth.Location = new System.Drawing.Point(12, 24);
-            this.lblWidth.Name = "lblWidth";
-            this.lblWidth.Size = new System.Drawing.Size(40, 13);
-            this.lblWidth.TabIndex = 0;
-            this.lblWidth.Text = "Width";
+            this.txtBombs.Location = new System.Drawing.Point(78, 72);
+            this.txtBombs.Name = "txtBombs";
+            this.txtBombs.Size = new System.Drawing.Size(78, 20);
+            this.txtBombs.TabIndex = 5;
             // 
-            // lblHeight
+            // txtHeight
             // 
-            this.lblHeight.AutoSize = true;
-            this.lblHeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeight.Location = new System.Drawing.Point(12, 49);
-            this.lblHeight.Name = "lblHeight";
-            this.lblHeight.Size = new System.Drawing.Size(44, 13);
-            this.lblHeight.TabIndex = 1;
-            this.lblHeight.Text = "Height";
+            this.txtHeight.Location = new System.Drawing.Point(78, 46);
+            this.txtHeight.Name = "txtHeight";
+            this.txtHeight.Size = new System.Drawing.Size(78, 20);
+            this.txtHeight.TabIndex = 4;
+            // 
+            // txtWidth
+            // 
+            this.txtWidth.Location = new System.Drawing.Point(78, 21);
+            this.txtWidth.Name = "txtWidth";
+            this.txtWidth.Size = new System.Drawing.Size(78, 20);
+            this.txtWidth.TabIndex = 3;
             // 
             // lblBombs
             // 
@@ -94,26 +99,35 @@ namespace winmine
             this.lblBombs.TabIndex = 2;
             this.lblBombs.Text = "Bombs";
             // 
-            // txtWidth
+            // lblHeight
             // 
-            this.txtWidth.Location = new System.Drawing.Point(78, 21);
-            this.txtWidth.Name = "txtWidth";
-            this.txtWidth.Size = new System.Drawing.Size(53, 20);
-            this.txtWidth.TabIndex = 3;
+            this.lblHeight.AutoSize = true;
+            this.lblHeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeight.Location = new System.Drawing.Point(12, 49);
+            this.lblHeight.Name = "lblHeight";
+            this.lblHeight.Size = new System.Drawing.Size(44, 13);
+            this.lblHeight.TabIndex = 1;
+            this.lblHeight.Text = "Height";
             // 
-            // txtHeight
+            // lblWidth
             // 
-            this.txtHeight.Location = new System.Drawing.Point(78, 46);
-            this.txtHeight.Name = "txtHeight";
-            this.txtHeight.Size = new System.Drawing.Size(53, 20);
-            this.txtHeight.TabIndex = 4;
+            this.lblWidth.AutoSize = true;
+            this.lblWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWidth.Location = new System.Drawing.Point(12, 24);
+            this.lblWidth.Name = "lblWidth";
+            this.lblWidth.Size = new System.Drawing.Size(40, 13);
+            this.lblWidth.TabIndex = 0;
+            this.lblWidth.Text = "Width";
             // 
-            // txtBombs
+            // btnCancel
             // 
-            this.txtBombs.Location = new System.Drawing.Point(78, 72);
-            this.txtBombs.Name = "txtBombs";
-            this.txtBombs.Size = new System.Drawing.Size(53, 20);
-            this.txtBombs.TabIndex = 5;
+            this.btnCancel.Location = new System.Drawing.Point(12, 98);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(60, 23);
+            this.btnCancel.TabIndex = 6;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // Options
             // 
@@ -121,6 +135,8 @@ namespace winmine
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(186, 160);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Options";
             this.Text = "Options";
             this.groupBox1.ResumeLayout(false);
@@ -139,5 +155,6 @@ namespace winmine
         private System.Windows.Forms.Label lblBombs;
         private System.Windows.Forms.Label lblHeight;
         private System.Windows.Forms.Label lblWidth;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

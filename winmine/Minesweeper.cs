@@ -11,16 +11,18 @@ using System.Threading;
 using System.IO;
 using IniParser;
 using IniParser.Model;
+using System.Windows.Input;
 
 namespace winmine
 {
-    public partial class Form1 : Form
+    public partial class Minesweeper : Form
     {
         Settings settings;
         Game game = new Game();
         byte buttonSizePX = 20;
         Image Flag;
         Image Bomb;
+        Image Chan;
         Button[] Grid;
         byte NumberOfFlags;
         Board beginnerBoard = new Board(9, 9, 10);
@@ -44,11 +46,12 @@ namespace winmine
 
         System.Windows.Forms.Timer t;
 
-        public Form1()
+        public Minesweeper()
         {
             InitializeComponent();
             Flag = Image.FromFile(getBasePath() + "\\flag.png");
             Bomb = Image.FromFile(getBasePath() + "\\Bomb.png");
+            Chan = Properties.Resources.chan;
             LoadSettings();
             btnSmile_Click(null, null);
         }
@@ -91,14 +94,20 @@ namespace winmine
             //LoadBoardSize(settings.difficulty);
             NumberOfFlags = 0;
             CurrentBoard = getBoard(settings.difficulty);
-            settings.Bombs = customBoard.Bombs;
+            settings.Bombs = CurrentBoard.Bombs;
             this.Width = (CurrentBoard.Width * buttonSizePX) + 30;
             this.Height = (CurrentBoard.Height * buttonSizePX) + gbTop.Height + 50 + menuStrip1.Height;
             SetupTimer();
 
             IsGameover = false;
             Grid = new Button[CurrentBoard.Width * CurrentBoard.Height];
-            gbMain.Controls.Clear();
+            for(int i = gbMain.Controls.Count; i > 0; i--)
+            {
+                Control c = gbMain.Controls[i-1];
+                gbMain.Controls.Remove(c);
+                c.Dispose();
+            }
+            //gbMain.Controls.Clear();
 
             for (ushort i = 0; i < Grid.Length; i++)
             {
@@ -122,6 +131,7 @@ namespace winmine
                     gbMain.Controls.Add(Grid[x]);
                     Grid[x].Location = new Point(buttonSizePX * w, buttonSizePX * c);
                     Grid[x].Click += btnMine_Click;
+                    Grid[x].MouseHover += btnMine_MouseHover;
                     Grid[x].BackColor = ButtonBackColour;
                     Grid[x].FlatStyle = FlatStyle.Popup;
                 }
@@ -140,15 +150,15 @@ namespace winmine
         Point Button;
         private void btnMine_MouseDown(object sender, EventArgs e)
         {
-            MouseEventArgs args = (MouseEventArgs)e;
+            System.Windows.Forms.MouseEventArgs args = (System.Windows.Forms.MouseEventArgs)e;
             if (args.Button != MouseButtons.Right) return;
             Button = args.Location;
         }
 
         private void btnMine_MouseUp(object sender, EventArgs e)
         {
-            if (((MouseEventArgs)e).Button != MouseButtons.Right) return;
-            if (Button == ((MouseEventArgs)e).Location)
+            if (((System.Windows.Forms.MouseEventArgs)e).Button != MouseButtons.Right) return;
+            if (Button == ((System.Windows.Forms.MouseEventArgs)e).Location)
                 btnMineRight_Click(sender, e);
             Button = Point.Empty;
         }
@@ -166,7 +176,6 @@ namespace winmine
                     pb.Size = Grid[i].Size;
                     pb.Padding = Grid[i].Padding;
                     pb.Font = new Font(Grid[i].Font, FontStyle.Bold);
-                    //pb.Image = Bomb;
                     pb.BackgroundImage = Bomb;
                     pb.BackgroundImageLayout = ImageLayout.Stretch;
                     
@@ -218,10 +227,35 @@ namespace winmine
                     Highscores hs = new Highscores();
                     hs.settings = settings;
                     hs.ShowDialog();
+                    gbMain.Refresh();
                 }
                 settings.Save();
+                ShowWinPicture();
             }
             btnSmile.Select();
+        }
+
+        private void ShowWinPicture()
+        {
+            Chan = new Bitmap(Chan, new Size(CurrentBoard.Width * buttonSizePX, CurrentBoard.Height * buttonSizePX));
+            for (int i = 0, square = 0, firstSquare=0; i < settings.NumberOfWins && i < CurrentBoard.Width * CurrentBoard.Height; i++, square+=5)
+            {
+                if(square > (CurrentBoard.Height * CurrentBoard.Width)-1)
+                {
+                    square = (++firstSquare);
+                }
+                Bitmap img = new Bitmap(Chan);
+                PictureBox pb = new PictureBox();
+                pb.Location = Grid[square].Location;
+                pb.Size = Grid[square].Size;
+                RectangleF rf = new RectangleF();
+                rf.X = Grid[square].Location.X;
+                rf.Y = Grid[square].Location.Y;
+                rf.Size = Grid[square].Size;
+                pb.Image = img.Clone(rf, Chan.PixelFormat);
+                gbMain.Controls.Add(pb);
+                pb.BringToFront();
+            }
         }
 
         //Swaps the given square to be a random non-bomb square.
@@ -248,8 +282,7 @@ namespace winmine
         {
             if(game.Board[index].IsFlagged && !game.Board[index].IsMine)
             {
-                NumberOfFlags--;
-                Mines.SetNumber(NumberOfFlags);
+                ToggleFlag(index);
             }
             Label label;
 
@@ -289,7 +322,6 @@ namespace winmine
                                 break;
                     default:    c = Color.White;
                                 break;
-
                 }
                 label = new Label();
                 gbMain.Controls.Add(label);
@@ -324,7 +356,6 @@ namespace winmine
             label.Font = new Font(b.Font, FontStyle.Bold);
             label.TextAlign = ContentAlignment.MiddleCenter;
             label.Paint += label_Paint;
-            //label.BorderStyle = BorderStyle.FixedSingle;
             
             b.Visible = false;
             return label;
@@ -435,7 +466,7 @@ namespace winmine
             if (IsGameover) return;
             //sender.
             ushort index = PositionToIndex(((Button)sender).Location); //ButtonNum[sender.GetHashCode()];
-            MouseEventArgs args = (MouseEventArgs)e;
+            System.Windows.Forms.MouseEventArgs args = (System.Windows.Forms.MouseEventArgs)e;
             if (args.Button != MouseButtons.Right) return;
             ToggleFlag(index);
         }
@@ -506,6 +537,69 @@ namespace winmine
             {
                 btnSmile_Click(null, null);
             }
+        }
+
+        private void btnMine_MouseHover(object sender, EventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftShift))
+            {
+                ushort index = PositionToIndex(((Button)sender).Location);
+                if(game.Board[index].IsMine)
+                {
+                    if (!game.Board[index].IsFlagged)
+                        ToggleFlag(index);
+                }
+            }
+        }
+
+        private void btnSmile_Paint(object sender, PaintEventArgs e)
+        {
+            int smileWidth = 20;
+            int smileHeight = 20;
+            int smileX = (btnSmile.Width - smileWidth) / 2;
+            int smileY = (btnSmile.Height - smileHeight) / 2;
+
+            int eyeSize = 5;
+            int eyeSidePad = 4;
+            int eyeTopPad = 5;
+
+            int LeftEyeX = smileX + eyeSidePad;
+            int LeftEyeY = smileY + eyeTopPad;
+
+            int RightEyeX = ((smileWidth + smileX) - (2 * eyeSidePad))-1;
+            int RightEyeY = smileY + eyeTopPad;
+
+            int SmileHeight = ((smileX + smileHeight) - eyeTopPad)-5;
+            //Head
+            e.Graphics.FillEllipse(Brushes.Yellow, smileX ,smileY, smileWidth, smileHeight);
+            e.Graphics.DrawEllipse(new Pen(Color.Black), smileX, smileY, smileWidth, smileHeight);
+
+            //Left Eye
+            e.Graphics.FillEllipse(Brushes.Black, LeftEyeX, LeftEyeY, eyeSize, eyeSize);
+            //Right Eye
+            e.Graphics.FillEllipse(Brushes.Black, RightEyeX,RightEyeY , eyeSize, eyeSize);
+
+            //Smile Left
+            PointF SmileLeft = new PointF(LeftEyeX+1, SmileHeight);
+            //Smile Right
+            PointF SmileRight = new PointF(RightEyeX+4, SmileHeight);
+            //Smile bottom
+            PointF SmileBottom = new PointF(SmileLeft.X + ((SmileRight.X - SmileLeft.X) /2), SmileHeight+3);
+            PointF[] smile = { SmileLeft, SmileBottom, SmileRight };
+            Pen p = new Pen(Color.Black, (float)1.5);
+            e.Graphics.DrawCurve(p, smile);
+
+
+            PointF SmileBottom0 = new PointF(SmileLeft.X + ((SmileRight.X - SmileLeft.X) / 2), SmileHeight + 1);
+            smile = new PointF[] { SmileLeft, SmileBottom, SmileRight };
+            e.Graphics.DrawCurve(p, smile);
+
+            p.Dispose();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new About().ShowDialog();
         }
     }
     public class Game

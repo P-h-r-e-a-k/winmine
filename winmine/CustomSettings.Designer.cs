@@ -29,15 +29,16 @@ namespace winmine
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomSettings));
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOkay = new System.Windows.Forms.Button();
             this.gbCustom = new System.Windows.Forms.GroupBox();
-            this.lblWidth = new System.Windows.Forms.Label();
-            this.lblBombs = new System.Windows.Forms.Label();
-            this.lblHeight = new System.Windows.Forms.Label();
-            this.txtWidth = new System.Windows.Forms.TextBox();
-            this.txtHeight = new System.Windows.Forms.TextBox();
             this.txtBombs = new System.Windows.Forms.TextBox();
+            this.txtHeight = new System.Windows.Forms.TextBox();
+            this.txtWidth = new System.Windows.Forms.TextBox();
+            this.lblHeight = new System.Windows.Forms.Label();
+            this.lblBombs = new System.Windows.Forms.Label();
+            this.lblWidth = new System.Windows.Forms.Label();
             this.gbCustom.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,25 +79,26 @@ namespace winmine
             this.gbCustom.TabIndex = 2;
             this.gbCustom.TabStop = false;
             // 
-            // lblWidth
+            // txtBombs
             // 
-            this.lblWidth.AutoSize = true;
-            this.lblWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWidth.Location = new System.Drawing.Point(8, 16);
-            this.lblWidth.Name = "lblWidth";
-            this.lblWidth.Size = new System.Drawing.Size(44, 13);
-            this.lblWidth.TabIndex = 2;
-            this.lblWidth.Text = "Width:";
+            this.txtBombs.Location = new System.Drawing.Point(85, 65);
+            this.txtBombs.Name = "txtBombs";
+            this.txtBombs.Size = new System.Drawing.Size(100, 20);
+            this.txtBombs.TabIndex = 7;
             // 
-            // lblBombs
+            // txtHeight
             // 
-            this.lblBombs.AutoSize = true;
-            this.lblBombs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBombs.Location = new System.Drawing.Point(8, 68);
-            this.lblBombs.Name = "lblBombs";
-            this.lblBombs.Size = new System.Drawing.Size(48, 13);
-            this.lblBombs.TabIndex = 3;
-            this.lblBombs.Text = "Bombs:";
+            this.txtHeight.Location = new System.Drawing.Point(85, 39);
+            this.txtHeight.Name = "txtHeight";
+            this.txtHeight.Size = new System.Drawing.Size(100, 20);
+            this.txtHeight.TabIndex = 6;
+            // 
+            // txtWidth
+            // 
+            this.txtWidth.Location = new System.Drawing.Point(85, 13);
+            this.txtWidth.Name = "txtWidth";
+            this.txtWidth.Size = new System.Drawing.Size(100, 20);
+            this.txtWidth.TabIndex = 5;
             // 
             // lblHeight
             // 
@@ -108,26 +110,25 @@ namespace winmine
             this.lblHeight.TabIndex = 4;
             this.lblHeight.Text = "Height:";
             // 
-            // txtWidth
+            // lblBombs
             // 
-            this.txtWidth.Location = new System.Drawing.Point(85, 13);
-            this.txtWidth.Name = "txtWidth";
-            this.txtWidth.Size = new System.Drawing.Size(100, 20);
-            this.txtWidth.TabIndex = 5;
+            this.lblBombs.AutoSize = true;
+            this.lblBombs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBombs.Location = new System.Drawing.Point(8, 68);
+            this.lblBombs.Name = "lblBombs";
+            this.lblBombs.Size = new System.Drawing.Size(48, 13);
+            this.lblBombs.TabIndex = 3;
+            this.lblBombs.Text = "Bombs:";
             // 
-            // txtHeight
+            // lblWidth
             // 
-            this.txtHeight.Location = new System.Drawing.Point(85, 39);
-            this.txtHeight.Name = "txtHeight";
-            this.txtHeight.Size = new System.Drawing.Size(100, 20);
-            this.txtHeight.TabIndex = 6;
-            // 
-            // txtBombs
-            // 
-            this.txtBombs.Location = new System.Drawing.Point(85, 65);
-            this.txtBombs.Name = "txtBombs";
-            this.txtBombs.Size = new System.Drawing.Size(100, 20);
-            this.txtBombs.TabIndex = 7;
+            this.lblWidth.AutoSize = true;
+            this.lblWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWidth.Location = new System.Drawing.Point(8, 16);
+            this.lblWidth.Name = "lblWidth";
+            this.lblWidth.Size = new System.Drawing.Size(44, 13);
+            this.lblWidth.TabIndex = 2;
+            this.lblWidth.Text = "Width:";
             // 
             // CustomSettings
             // 
@@ -138,6 +139,7 @@ namespace winmine
             this.ClientSize = new System.Drawing.Size(229, 144);
             this.ControlBox = false;
             this.Controls.Add(this.gbCustom);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CustomSettings";
             this.Text = "CustomSettings";
             this.Load += new System.EventHandler(this.CustomSettings_Load);

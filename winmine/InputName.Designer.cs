@@ -29,6 +29,7 @@ namespace winmine
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputName));
             this.lblCongratulations = new System.Windows.Forms.Label();
             this.btnOkay = new System.Windows.Forms.Button();
             this.txtName = new System.Windows.Forms.TextBox();
@@ -71,6 +72,7 @@ namespace winmine
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.btnOkay);
             this.Controls.Add(this.lblCongratulations);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "InputName";
             this.Text = "Pleaes enter your name";

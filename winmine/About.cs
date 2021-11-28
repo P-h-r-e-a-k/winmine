@@ -10,21 +10,16 @@ using System.Windows.Forms;
 
 namespace winmine
 {
-    public partial class Options : Form
+    public partial class About : Form
     {
-        public Options()
+        public About()
         {
             InitializeComponent();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void btnOkay_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }

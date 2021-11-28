@@ -122,6 +122,7 @@ namespace winmine
                 scores.Clear();
                 for(int i = 0; i < 10; i++)
                     scores.Add(new Score("Anonymous", 999));
+                settings.Save();
                 populateScores(scores);
             }
         }

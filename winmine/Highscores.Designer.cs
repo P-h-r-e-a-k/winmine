@@ -29,6 +29,7 @@ namespace winmine
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Highscores));
             this.gbOuter = new System.Windows.Forms.GroupBox();
             this.gbScores = new System.Windows.Forms.GroupBox();
             this.btnClose = new System.Windows.Forms.Button();
@@ -62,6 +63,7 @@ namespace winmine
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Location = new System.Drawing.Point(116, 248);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(85, 23);
@@ -108,6 +110,7 @@ namespace winmine
             this.ClientSize = new System.Drawing.Size(243, 353);
             this.Controls.Add(this.gbOuter);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Highscores";
             this.Text = "Highscores";
